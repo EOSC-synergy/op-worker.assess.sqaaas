@@ -1,0 +1,72 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: main
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    github.com/onedata/op-worker:
+      branch: develop
+      repo: https://github.com/onedata/op-worker
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      github.com/onedata/op-worker git:
+        commands:
+        - /usr/bin/env sh .sqa/script.hasty-malachite-ibis.sh
+        container: qc.acc_flaky-white-mouse
+  QC.Doc:
+    repos:
+      github.com/onedata/op-worker find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.sickly-cinnabar-cat.sh
+        container: qc.doc_scummy-green-dunker
+      github.com/onedata/op-worker git:
+        commands:
+        - /usr/bin/env sh .sqa/script.zippy-magenta-echidna.sh
+        container: qc.doc_chewy-rust-tortoise
+      github.com/onedata/op-worker markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.scanty-platinum-cuscus.sh
+        container: qc.doc_seedy-cerise-bonobo
+  QC.Lic:
+    repos:
+      github.com/onedata/op-worker licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.chewy-carmine-cougar.sh
+        container: qc.lic_homely-razzmatazz-dogfish
+  QC.Sec:
+    repos:
+      github.com/onedata/op-worker bandit:
+        commands:
+        - /usr/bin/env sh .sqa/script.bumpy-gold-lion.sh
+        container: qc.sec_cozy-rose-ocelot
+  QC.Sty:
+    repos:
+      github.com/onedata/op-worker flake8:
+        commands:
+        - /usr/bin/env sh .sqa/script.homely-tan-cuttlefish.sh
+        container: qc.sty_tacky-buff-foxhound
+      github.com/onedata/op-worker jsonlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.queasy-persimmon-zorse.sh
+        container: qc.sty_gimpy-blue-gorilla
+      github.com/onedata/op-worker oclint:
+        commands:
+        - /usr/bin/env sh .sqa/script.wiggy-beige-falcon.sh
+        container: qc.sty_cheeky-charcoal-cattle
+  QC.Uni:
+    repos:
+      github.com/onedata/op-worker pytest:
+        commands:
+        - /usr/bin/env sh .sqa/script.zippy-firebrick-angora.sh
+        container: qc.uni_ready-chestnut-armadillo
+  QC.Ver:
+    repos:
+      github.com/onedata/op-worker get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.tasty-ochre-spoonbill.sh
+        container: qc.ver_crabby-gamboge-fish
+timeout: 5400
